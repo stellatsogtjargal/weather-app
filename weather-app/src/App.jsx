@@ -3,6 +3,7 @@ import Search from './components/Search'
 import CurrentWeather from './components/CurrentWeather'
 import { useState } from 'react'
 import DailyForecast from './components/DailyForecast'
+import News from './components/News'
 
 function App() {
   const API_KEY = '2ae1e0a4ba4589fccff57de5884ef703';
@@ -16,7 +17,7 @@ function App() {
     const currentWeatherFetch = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=imperial`)
     const hourlyForecastFetch = fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid=${API_KEY}&cnt=24&units=imperial`)
     const dailyForecastFetch = fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=7&appid=${API_KEY}&units=imperial`)
-
+    
     Promise.all([currentWeatherFetch,hourlyForecastFetch,dailyForecastFetch])
     .then(async (response) => {
       const weatherResponse = await response[0].json();
@@ -36,6 +37,7 @@ function App() {
 
   return (
     <>
+      <News></News>
       <Search onSearchChange = {handleSearchChange} ></Search>
       {currentWeather && <CurrentWeather data ={currentWeather} />}
       {dailyForecast && <DailyForecast data = {dailyForecast} />}

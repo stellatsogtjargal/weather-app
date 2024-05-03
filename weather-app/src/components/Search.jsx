@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import { AsyncPaginate } from 'react-select-async-paginate'
+import  './forecast.css' 
 const Search = ({onSearchChange}) => {
     const [search, setSearch] = useState(null);
     const loadOptions = (inputValue) => {
@@ -22,6 +23,8 @@ const Search = ({onSearchChange}) => {
         onSearchChange(searchData);
     }
     return (
+        <>
+            <label className='title'>Weather</label>
             <AsyncPaginate 
                 placeholder = "Search for city"
                 debounceTimeout = {600}
@@ -29,6 +32,7 @@ const Search = ({onSearchChange}) => {
                 onChange = {handleOnChange}
                 loadOptions={ loadOptions }
             />
+        </>
     )
 }
 export default Search;
